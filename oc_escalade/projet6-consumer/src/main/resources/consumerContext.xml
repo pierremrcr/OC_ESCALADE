@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="abstractDaoImpl" abstract="true">
+  <property name="dataSource" ref="dataSourceEscalade"/>
+</bean>
+
+<!-- ==== AbstractDao ===== -->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetClass" value="org.projet6.consumer.Impl.AbstractDaoImpl"/>
+        <property name="targetMethod" value="setDataSource"/>
+        <property name="arguments" ref="dataSourceEscalade"/>
+    </bean>
+
+
+    <!-- ===== Déclaration des DAO ===== -->
+    
+    <bean id="utilisateurDao" parent="abstractDaoImpl" 
+    class="org.projet6.consumer.Impl.UtilisateurDaoImpl"/>
+    
+    <bean id="spotDao" parent="abstractDaoImpl"
+    class="org.projet6.consumer.Impl.SpotDaoImpl"/>
+    
+    <bean id="adresseDao" parent="abstractDaoImpl"
+    class="org.projet6.consumer.Impl.AdresseDaoImpl" />
+    
+    <bean id="secteurDao" parent="abstractDaoImpl"
+    class="org.projet6.consumer.Impl.SecteurDaoImpl" />
+    
+    <bean id="voieDao" parent="abstractDaoImpl"
+    class="org.projet6.consumer.Impl.VoieDaoImpl" />
+    
+    <bean id="longueurDao" parent="abstractDaoImpl"
+    class="org.projet6.consumer.Impl.LongueurDaoImpl" />
+    
+    <bean id="topoDao" parent="abstractDaoImpl"
+    class="org.projet6.consumer.Impl.TopoDaoImpl" />
+    
+    <bean id="commentaireDao" parent="abstractDaoImpl"
+    class="org.projet6.consumer.Impl.CommentaireDaoImpl" />
+    
+    <bean id="reservationDao" parent="abstractDaoImpl"
+    class="org.projet6.consumer.Impl.ReservationDaoImpl" />
+    
+    <bean id="commentaireTopoDao" parent="abstractDaoImpl"
+    class="org.projet6.consumer.Impl.CommentaireTopoDaoImpl" />
+
+    <!-- ===== DaoFactory ===== -->
+    <bean id="daoFactory" class="org.projet6.consumer.Impl.DaoFactoryImpl">
+        <property name="utilisateurDao" ref="utilisateurDao"/>
+        <property name="spotDao" ref="spotDao" />
+        <property name="adresseDao" ref="adresseDao" />
+        <property name="secteurDao" ref="secteurDao" />
+        <property name="voieDao" ref="voieDao" />
+        <property name="longueurDao" ref="longueurDao" />
+        <property name="topoDao" ref="topoDao" />
+        <property name="commentaireDao" ref="commentaireDao" />
+        <property name="reservationDao" ref="reservationDao" />
+        <property name="commentaireTopoDao" ref="commentaireTopoDao" />
+    </bean>
+    
+  
+    
+</beans>

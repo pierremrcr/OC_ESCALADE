@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- ===== Déclaration des Managers ===== -->
+<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSourceEscalade"></property>
+	</bean>
+
+	<bean id="abstractManager" abstract="true">
+		<property name="daoFactory" ref="daoFactory" />
+		<property name="platformTransactionManager" ref="txManager" />
+	</bean>
+
+	<bean id="utilisateurManager"
+		class="org.projet6.business.managerImpl.UtilisateurManagerImpl"
+		parent="abstractManager" />
+		
+    
+    <bean id="spotManager"
+    	 class="org.projet6.business.managerImpl.SpotManagerImpl"
+    	 parent="abstractManager" />
+    	 
+   
+   <bean id="adresseManager"
+   class="org.projet6.business.managerImpl.AdresseManagerImpl"
+   parent="abstractManager" />
+
+
+  <bean id="commentaireManager"
+   class="org.projet6.business.managerImpl.CommentaireManagerImpl"
+   parent="abstractManager" />
+   
+   <bean id="secteurManager"
+   class="org.projet6.business.managerImpl.SecteurManagerImpl"
+   parent="abstractManager" />
+   
+    <bean id="voieManager"
+   class="org.projet6.business.managerImpl.VoieManagerImpl"
+   parent="abstractManager" />
+   
+    <bean id="longueurManager"
+   class="org.projet6.business.managerImpl.LongueurManagerImpl"
+   parent="abstractManager" />
+   
+    <bean id="topoManager"
+   class="org.projet6.business.managerImpl.TopoManagerImpl"
+   parent="abstractManager" />
+   
+       <bean id="reservationManager"
+   class="org.projet6.business.managerImpl.ReservationManagerImpl"
+   parent="abstractManager" />
+   
+   <bean id="commentaireTopoManager"
+   class="org.projet6.business.managerImpl.CommentaireTopoManagerImpl"
+   parent="abstractManager" />
+   
+   
+   
+   
+	<!-- ===== ManagerFactory ===== -->
+	<bean id="managerFactory"
+		class="org.projet6.business.managerImpl.ManagerFactoryImpl">
+		<property name="utilisateurManager" ref="utilisateurManager" />
+		<property name="spotManager" ref="spotManager" />
+		<property name="adresseManager" ref="adresseManager" />
+		<property name="commentaireManager" ref="commentaireManager" />
+		<property name="secteurManager" ref="secteurManager" />
+		<property name="topoManager" ref="topoManager" />
+		<property name="voieManager" ref="voieManager" />
+		<property name="longueurManager" ref="longueurManager" />
+		<property name="reservationManager" ref="reservationManager" />
+		<property name="commentaireTopoManager" ref="commentaireTopoManager" />
+	</bean>
+
+</beans>
+    
+    

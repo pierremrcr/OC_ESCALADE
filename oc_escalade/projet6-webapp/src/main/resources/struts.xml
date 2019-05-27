@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+	<package name="default" extends="struts-default">
+		<!-- Action par défaut -->
+		<default-action-ref name="index" />
+
+		<!-- Action "index" -->
+		<action name="index">
+			<result>/jsp/index.jsp</result>
+		</action>
+
+        <!-- ACTION UTILISATEURS -->
+
+		<!-- Action listant les utilisateurs -->
+		<action name="utilisateur_list"
+			class="org.projet6.action.GestionUtilisateurAction" method="doList">
+			<result>/jsp/utilisateur/list.jsp</result>
+		</action>
+
+		<!-- Action affichant le détail d'un utilisateur -->
+		<action name="utilisateur_detail"
+			class="org.projet6.action.GestionUtilisateurAction" method="doDetail">
+			<result name="success">/jsp/utilisateur/detail.jsp</result>
+			<result name="error">/jsp/erreur.jsp</result>
+		</action>
+
+		<!-- Action permettant d'ajouter un nouvel utilisateur -->
+		<action name="nouvel_utilisateur"
+			class="org.projet6.action.GestionUtilisateurAction" method="doCreate">
+			<result name="input">/jsp/utilisateur/nouvelUtilisateur.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">index</param>
+				<!-- <param name="idutilisateur">${utilisateur.id}</param> -->
+			</result>
+		</action>
+
+		<!-- <action name="update_Account" -->
+		<!-- class="org.projet6.action.GestionUtilisateurAction" method="doUpdate"> -->
+
+
+		<!-- Action permettant d'afficher les réservations d'un utilisateur -->
+		<action name="ResaTopo"
+			class="org.projet6.action.GestionResaTopoAction"
+			method="doManageMyLoan">
+			<result>jsp/resaTopo/listeReservation.jsp</result>
+		</action>
+
+		<!-- Action permettant d'annuler la réservation d'un utilisateur -->
+		<action name="delete_resa"
+			class="org.projet6.action.GestionResaTopoAction" method="doCancel">
+			<result>jsp/resaTopo/listeReservation.jsp</result>
+		</action>
+
+		<!-- Actions Login/Logout -->
+		<action name="login" class="org.projet6.action.LoginAction"
+			method="doLogin">
+			<result name="input">/jsp/utilisateur/login.jsp</result>
+			<result name="success" type="redirectAction">index</result>
+		</action>
+		<action name="logout" class="org.projet6.action.LoginAction"
+			method="doLogout">
+			<result type="redirectAction">index</result>
+		</action>
+
+		<action name="deleteAccount"
+			class="org.projet6.action.GestionUtilisateurAction" method="doDelete">
+			<result name="success">/jsp/utilisateur/confirmationSuppression.jsp
+			</result>
+		</action>
+
+
+		<!-- ACTION SITES -->
+
+
+		<!-- Action listant les spots -->
+		<action name="spot_list"
+			class="org.projet6.action.GestionSpotAction" method="doList">
+			<result>/jsp/spot/list.jsp</result>
+		</action>
+
+		<!-- Action affichant le détail d'un spot -->
+		<action name="spot_detail"
+			class="org.projet6.action.GestionSpotAction" method="doDetail">
+			<result name="success">/jsp/spot/detail.jsp</result>
+			<result name="error">/jsp/erreur.jsp</result>
+		</action>
+
+		<!-- Action permettant d'ajouter un nouveau spot -->
+		<action name="nouveau_spot"
+			class="org.projet6.action.GestionSpotAction" method="doCreate">
+			<result name="input">/jsp/spot/nouveauSpot.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">nouveau_secteur</param>
+			</result>
+		</action>
+
+		<action name="deleteSpot"
+			class="org.projet6.action.GestionSpotAction" method="doDelete">
+			<result name="success">/jsp/spot/confirmationSuppressionSpot.jsp
+			</result>
+		</action>
+
+
+		<!-- Action permettant d'ajouter un commentaire sur un spot -->
+		<action name="nouveau_commentaire_site"
+			class="org.projet6.action.GestionSpotAction" method="doAddComment">
+			<result name="success" type="redirectAction">
+				<param name="actionName">spot_detail</param>
+				<param name="id">${id}</param>
+			</result>
+		</action>
+
+		<action name="deleteComment"
+			class="org.projet6.action.GestionSpotAction" method="doDeleteComment">
+			<result name="success" type="redirectAction">
+				<param name="actionName">spot_detail</param>
+			</result>
+		</action>
+
+
+
+		<!-- ACTIONS TOPOS -->
+
+		<!-- Action listant les topos -->
+		<action name="topo_list"
+			class="org.projet6.action.GestionTopoAction" method="doList">
+			<result>/jsp/topo/list.jsp</result>
+		</action>
+
+		<!-- Action affichant le détail d'un topo -->
+		<action name="topo_detail"
+			class="org.projet6.action.GestionTopoAction" method="doDetail">
+			<result name="success">/jsp/topo/detail.jsp</result>
+			<result name="error">/jsp/erreur.jsp</result>
+		</action>
+
+		<!-- Action permettant d'ajouter un nouveau topo -->
+		<action name="nouveau_topo"
+			class="org.projet6.action.GestionTopoAction" method="doCreate">
+			<result name="input">/jsp/topo/nouveauTopo.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">index</param>
+			</result>
+		</action>
+
+		<!-- Action permettant d'ajouter un commentaire sur un topo -->
+		<action name="nouveau_commentaire_topo"
+			class="org.projet6.action.GestionTopoAction" method="doAddComment">
+			<result name="success" type="redirectAction">
+				<param name="actionName">topo_detail</param>
+				<param name="id">${id}</param>
+			</result>
+		</action>
+
+		<action name="deleteTopo"
+			class="org.projet6.action.GestionTopoAction" method="doDelete">
+			<result name="success">/jsp/topo/confirmationSuppressionTopo.jsp
+			</result>
+		</action>
+
+		<!-- RESERVATION TOPO -->
+
+
+		<action name="topo_reservation"
+			class="org.projet6.action.GestionTopoAction" method="doBorrow">
+			<result name="input">jsp/resaTopo/reservation.jsp</result>
+			<result name="success">jsp/resaTopo/confirmation.jsp</result>
+		</action>
+
+
+		<!-- ACTIONS SECTEURS -->
+
+		<!-- Action listant les secteurs -->
+		<action name="secteur_list"
+			class="org.projet6.action.GestionSecteurAction" method="doList">
+			<result>/jsp/secteur/list.jsp</result>
+		</action>
+
+		<!-- Action affichant le détail d'un secteur -->
+		<action name="secteur_detail"
+			class="org.projet6.action.GestionSecteurAction" method="doDetail">
+			<result name="success">/jsp/secteur/detail.jsp</result>
+			<result name="error">/jsp/erreur.jsp</result>
+		</action>
+
+		<!-- Action permettant d'ajouter un nouveau secteur -->
+		<action name="nouveau_secteur"
+			class="org.projet6.action.GestionSecteurAction" method="doCreate">
+			<result name="input">/jsp/secteur/nouveauSecteur.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">nouvelle_voie</param>
+			</result>
+			<result name="error">/jsp/secteur/nouveauSecteur.jsp</result>
+		</action>
+
+		<action name="deleteSecteur"
+			class="org.projet6.action.GestionSecteurAction" method="doDelete">
+			<result name="success">/jsp/secteur/confirmationSuppressionSecteur.jsp
+			</result>
+		</action>
+
+
+		<!-- ACTIONS VOIES -->
+
+		<!-- Action listant les voies -->
+		<action name="voie_list"
+			class="org.projet6.action.GestionVoieAction" method="doList">
+			<result>/jsp/voie/list.jsp</result>
+		</action>
+
+		<!-- Action affichant le détail d'une voie -->
+		<action name="voie_detail"
+			class="org.projet6.action.GestionVoieAction" method="doDetail">
+			<result name="success">/jsp/voie/detail.jsp</result>
+			<result name="error">/jsp/erreur.jsp</result>
+		</action>
+
+		<!-- Action permettant d'ajouter une nouvelle voie -->
+		<action name="nouvelle_voie"
+			class="org.projet6.action.GestionVoieAction" method="doCreate">
+			<result name="input">/jsp/voie/nouvelleVoie.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">nouvelle_longueur</param>
+			</result>
+		</action>
+
+
+		<!-- ACTIONS LONGUEURS -->
+
+		<!-- Action listant les longueurs -->
+		<action name="longueur_list"
+			class="org.projet6.action.GestionLongueurAction" method="doList">
+			<result>/jsp/longueur/list.jsp</result>
+		</action>
+
+		<!-- Action affichant le détail d'une longueur -->
+		<action name="longueur_detail"
+			class="org.projet6.action.GestionLongueurAction" method="doDetail">
+			<result name="success">/jsp/longueur/detail.jsp</result>
+			<result name="error">/jsp/erreur.jsp</result>
+		</action>
+
+		<!-- Action permettant d'ajouter une nouvelle longueur -->
+		<action name="nouvelle_longueur"
+			class="org.projet6.action.GestionLongueurAction" method="doCreate">
+			<result name="input">/jsp/longueur/nouvelleLongueur.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">index</param>
+			</result>
+		</action>
+
+		<!-- Action listant les adresses -->
+		<action name="adresse_list"
+			class="org.projet6.action.GestionAdresseAction" method="doList">
+			<result>/jsp/adresse/list.jsp</result>
+		</action>
+
+
+		<!-- Action affichant le détail d'une adresse -->
+		<action name="adresse_detail"
+			class="org.projet6.action.GestionAdresseAction" method="doDetail">
+			<result name="success">/jsp/adresse/detail.jsp</result>
+			<result name="error">/jsp/erreur.jsp</result>
+		</action>
+
+		<!-- Action permettant d'ajouter une nouvelle adresse -->
+		<action name="nouvelle_adresse"
+			class="org.projet6.action.GestionAdresseAction" method="doCreate">
+			<result name="input">/jsp/adresse/nouvelleAdresse.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">index</param>
+			</result>
+		</action>
+
+
+		<!-- RECHERCHE SITES -->
+
+
+		<!-- Action permettant de faire une recherche multi critères -->
+		<action name="rechercheMultiCritere"
+			class="org.projet6.action.GestionMultiCritereAction"
+			method="doSearch">
+			<result name="input">/jsp/spot/rechercheMultiCritere.jsp</result>
+			<result name="success">/jsp/spot/resultatRecherche.jsp</result>
+		</action>
+
+
+
+		<!-- ACTION ADMINISTRATEUR -->
+
+		<!-- Action "Gestion Commentaire" -->
+		<action name="gestion_comment"
+			class="org.projet6.action.BackGestionCommentAction"
+			method="doListComment">
+			<result>/jsp/commentaire/gestionCommentaire.jsp</result>
+		</action>
+
+		<action name="delete_comment"
+			class="org.projet6.action.BackGestionCommentAction"
+			method="doDeleteComment">
+			<result name="success" type="redirectAction">gestion_comment</result>
+			<result name="error">/jsp/site/error.jsp</result>
+		</action>
+
+		<action name="detail_comment"
+			class="org.projet6.action.BackGestionCommentAction"
+			method="doDetailComment">
+			<result name="success">/jsp/commentaire/modificationCommentaire.jsp
+			</result>
+			<result name="error">/jsp/site/error.jsp</result>
+		</action>
+
+		<action name="update_comment"
+			class="org.projet6.action.BackGestionCommentAction"
+			method="doUpdateComment">
+			<result name="success" type="redirectAction">gestion_comment</result>
+			<result name="error">/jsp/site/error.jsp</result>
+		</action>
+
+
+	</package>
+</struts>
