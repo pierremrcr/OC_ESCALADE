@@ -23,8 +23,29 @@ Vous pouvez désormais créer la base de donnée. Faites un clic droit sur "Base
 
 Déroulez la nouvelle base de données pour afficher son contenu. Faite un clic droit sur "public" puis dans la liste proposé sélectionnez "Create Script".
 
+Retournez sur github, cliquez sur le bouton Clone or Download puis sur Download ZIP.
+
+Dézipper le dossier et allez dans le dossier base_de_donnees.
+
 Faites un clic droit sur le fichier "bdd_oc_escalade" et ouvez le avec un éditeur de texte. Copiez le contenu et collez le dans l'éditeur de pgAdmin et cliquez sur l'icône dans la barre de tâches qui ressemble à un éclair.
 
+Maintenant que vous avez crée la base de donnée, il va falloir déployer l'application.
+
+Retournez dans le dossier OC_ESCALADE, et ouvrez le dossier oc_escalade. Copiez le chemin qui pointe vers ce dossier.
+
+Ouvez votre invite de commande, tapez la commande cd suivi du chemin copié à l'étape précédente. Faites entrer.
+
+Entrez la commande mvn package afin d'empaqueter l'application.
+
+Ouvrez ensuite le dossier target en suivant le chemin suivant : projet6-webapp\target et copiez le fichier projet6-webapp.war.
+
+Rendez-vous dans le dossier apache-tomcat-9.0.16-windows-x64, ouvrez le dossier Webapps et coller le ficher projet6-webapp.rar à l'intérieur.
+
+Pour lancer le serveur Tomcat, revenez dans le dossier précédent et ouvrez le dossier bin. Double cliquez sur le fichier startup.
+
+Une invite de commande va s'ouvrir.
+
+Ouvez votre navigateur et entrez l'URL suivante : https://localhost:8080/projet6-webapp/
 
 
 
