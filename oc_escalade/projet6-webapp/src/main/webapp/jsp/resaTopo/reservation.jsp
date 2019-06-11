@@ -51,15 +51,13 @@
 	      <tr>
 	        <th>date début</th>
 	        <th>date fin</th>
-           <th>Emprunteur</th>
 	      </tr>
    		</thead>
    		  <tbody>
 		<s:iterator value="listeEmprunt">
 		 <tr>
 		        <td><s:property value="dateDebut"/></td>
-		        <td><s:property value="dateFin"/></td>
-                <td><s:property value="reservation.emprunteur"/></td>
+		        <td><s:property value="dateFin"/></td>              
 		 </tr>
 		</s:iterator>
 		<tbody>

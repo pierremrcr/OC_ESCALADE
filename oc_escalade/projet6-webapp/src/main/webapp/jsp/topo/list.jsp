@@ -11,15 +11,25 @@
 
 <h2>Liste des topos</h2>
 
-<ul>
+ <div class="table-responsive">
+      <table class="table table-hover table-border">
+         <thead>
+            <tr>
+               <th>Nom</th>
+               <th>Propriétaire du topo</th>
+
+            </tr>
+
+
 <s:iterator value="listeTopo">
-<li>
- <s:a action="topo_detail">
+<tr>
+
+ <td><s:a action="topo_detail">
 <s:param name="id" value="id" />
 <s:property value="nom" />
-  </s:a>
-
-</li>
+  </s:a></td>
+<td><s:property value="proprietaire.prenom"/> <s:property value="proprietaire.nom"/>
+</tr>
 </s:iterator>
 </ul>
 
