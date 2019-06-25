@@ -83,7 +83,7 @@ public class TopoDaoImpl extends AbstractDaoImpl implements TopoDao {
 		
 		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource());
 		
-		vJdbcTemplate.update(vSQL, topo.getNom(), topo.getDescription(), topo.getProprietaire().getId());
+		vJdbcTemplate.update(vSQL, topo.getNom(), topo.getDescription(), topo.getProprietaire().getId(), topo.getId());
 		
 	}
 

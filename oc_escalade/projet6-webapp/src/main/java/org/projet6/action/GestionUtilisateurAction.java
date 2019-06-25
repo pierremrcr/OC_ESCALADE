@@ -5,18 +5,17 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 import org.projet6.model.bean.Utilisateur;
+import org.springframework.util.StringUtils;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 public class GestionUtilisateurAction extends ActionSupport implements SessionAware {
 
-  private Integer id;
-
-  private List<Utilisateur> listUtilisateur;
-
-  private Utilisateur utilisateur;
-
+  private Integer             id;
+  private List<Utilisateur>   listUtilisateur;
+  private Utilisateur         utilisateur;
   private Map<String, Object> session;
+
 
   public void setSession(Map<String, Object> pSession) {
     this.session = pSession;
@@ -125,5 +124,7 @@ public class GestionUtilisateurAction extends ActionSupport implements SessionAw
     return vResult;
 
   }
+
+ 
 
 }

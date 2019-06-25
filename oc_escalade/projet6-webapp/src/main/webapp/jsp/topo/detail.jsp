@@ -74,6 +74,11 @@
                <s:param value="topo.id" name="id" />
                <button class="btn btn-primary">Supprimer ce topo</button>
             </s:a>
+            
+            <s:a action="detail_Topo">
+            <s:param value="topo.id" name="id" />
+               <button class="btn btn-primary">Modifier ce topo</button>
+            </s:a>
 
          </s:if>
 

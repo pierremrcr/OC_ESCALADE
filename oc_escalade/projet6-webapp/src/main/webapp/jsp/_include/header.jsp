@@ -31,9 +31,7 @@
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                aria-expanded="false">Administration</a>
                <div class="dropdown-menu" x-placement="bottom-start"
-                  style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);">
-                  <a class="dropdown-item" href="spot_gestion">Gestion Spot</a> 
-                  <a class="dropdown-item" href="topo_gestion">Gestion Topo</a> 
+                  style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);">                                
                   <a class="dropdown-item" href="utilisateur_gestion">Gestion Utilisateur</a> 
                   <a class="dropdown-item" href="gestion_comment">Gestion Commentaire</a> 
                   <a class="dropdown-item" href="logout">Déconnexion</a>

@@ -111,6 +111,11 @@
          <button class="btn btn-primary">Supprimer ce site</button>
       </s:a>
       
+         <s:a action="detail_Spot">
+         <s:param value="spot.id" name="id" />
+         <button class="btn btn-primary">Modifier ce site</button>
+      </s:a>
+      
 </s:if>
 
       <footer>

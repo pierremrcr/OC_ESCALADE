@@ -4,179 +4,318 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
+import org.projet6.model.bean.Adresse;
 import org.projet6.model.bean.Commentaire;
 import org.projet6.model.bean.Spot;
 import org.projet6.model.bean.Utilisateur;
+import org.springframework.util.StringUtils;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 public class GestionSpotAction extends ActionSupport implements SessionAware {
 
-	private Integer id;
+  private Integer             id;
+  private List<Spot>          listeSpots;
+  private Spot                spot;
+  private int                 spotId;
+  private Map<String, Object> session;
+  private Commentaire         commentaire = new Commentaire();
+  private Integer             commentaireId;
+  private String              nom;
+  private String              description;
+  private Adresse             adresse;
+  private String              rue;
+  private int                 numero;
+  private String              ville;
+  private String              codePostal;
+  private String              region;
+  private String              departement;
 
-	private List<Spot> listeSpots;
+  public Spot getSpot() {
+    return spot;
 
-	private Spot spot;
+  }
 
-	private int spotId;
+  public void setSpot(Spot spot) {
+    this.spot = spot;
+  }
 
-	private Map<String, Object> session;
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	private Commentaire commentaire = new Commentaire();
+  public Integer getId() {
+    return id;
+  }
 
-	private Integer commentaireId;
+  public int getSpotId() {
+    return spotId;
+  }
 
-	public Spot getSpot() {
-		return spot;
+  public void setSpotId(int spotId) {
+    this.spotId = spotId;
+  }
 
-	}
+  public List<Spot> getListeSpots() {
 
-	public void setSpot(Spot spot) {
-		this.spot = spot;
-	}
+    return listeSpots;
+  }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  public void setListeSpots(List<Spot> listeSpots) {
+    this.listeSpots = listeSpots;
+  }
 
-	public Integer getId() {
-		return id;
-	}
+  public Commentaire getCommentaire() {
+    return commentaire;
+  }
 
-	public int getSpotId() {
-		return spotId;
-	}
+  public void setCommentaire(Commentaire commentaire) {
+    this.commentaire = commentaire;
+  }
 
-	public void setSpotId(int spotId) {
-		this.spotId = spotId;
-	}
+  public Map<String, Object> getSession() {
+    return session;
+  }
 
-	public List<Spot> getListeSpots() {
+  public void setSession(Map<String, Object> session) {
+    this.session = session;
+  }
 
-		return listeSpots;
-	}
+  public Integer getCommentaireId() {
+    return commentaireId;
+  }
 
-	public void setListeSpots(List<Spot> listeSpots) {
-		this.listeSpots = listeSpots;
-	}
+  public void setCommentaireId(Integer commentaireId) {
+    this.commentaireId = commentaireId;
+  }
 
-	public Commentaire getCommentaire() {
-		return commentaire;
-	}
+  public String getNom() {
+    return nom;
+  }
 
-	public void setCommentaire(Commentaire commentaire) {
-		this.commentaire = commentaire;
-	}
+  public void setNom(String nom) {
+    this.nom = nom;
+  }
 
-	public Map<String, Object> getSession() {
-		return session;
-	}
+  public String getDescription() {
+    return description;
+  }
 
-	public void setSession(Map<String, Object> session) {
-		this.session = session;
-	}
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-	public Integer getCommentaireId() {
-		return commentaireId;
-	}
+  public Adresse getAdresse() {
+    return adresse;
+  }
 
-	public void setCommentaireId(Integer commentaireId) {
-		this.commentaireId = commentaireId;
-	}
+  public void setAdresse(Adresse adresse) {
+    this.adresse = adresse;
+  }
 
-	public String doList() {
+  public String getRue() {
+    return rue;
+  }
 
-		listeSpots = WebappHelper.getManagerFactory().getSpotManager().getListSpot();
+  public void setRue(String rue) {
+    this.rue = rue;
+  }
 
-		return ActionSupport.SUCCESS;
+  public int getNumero() {
+    return numero;
+  }
 
-	}
+  public void setNumero(int numero) {
+    this.numero = numero;
+  }
 
-	public String doDetail() {
+  public String getVille() {
+    return ville;
+  }
 
-		if (id == null) {
-			this.addActionError("Vous devez indiquer un id");
+  public void setVille(String ville) {
+    this.ville = ville;
+  }
+  
+  
+  public String getCodePostal() {
+    return codePostal;
+  }
 
-		} else {
-			// try {
-			spot = WebappHelper.getManagerFactory().getSpotManager().getSpot(id);
-			// } catch (NotFoundException pE) {
-			// this.addActionError("Utilisateur non trouvé. id = " + id);
-			// }
+  public void setCodePostal(String codePostal) {
+    this.codePostal = codePostal;
+  }
 
-		}
+  public String getRegion() {
+    return region;
+  }
 
-		return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
+  public void setRegion(String region) {
+    this.region = region;
+  }
 
-	}
+  public String getDepartement() {
+    return departement;
+  }
 
-	public String doCreate() {
+  public void setDepartement(String departement) {
+    this.departement = departement;
+  }
 
-		String vResult = ActionSupport.INPUT;
+  public String doList() {
 
-		try {
+    listeSpots = WebappHelper.getManagerFactory().getSpotManager().getListSpot();
 
-			WebappHelper.getManagerFactory().getSpotManager().ajoutSpot(spot);
-			spotId = spot.getId();
-			vResult = ActionSupport.SUCCESS;
-			this.addActionMessage("Création d'un nouveau spot");
+    return ActionSupport.SUCCESS;
 
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+  }
 
-		}
+  public String doDetail() {
 
-		return vResult;
+    if (id == null) {
+      this.addActionError("Vous devez indiquer un id");
 
-	}
+    } else {
+      // try {
+      spot = WebappHelper.getManagerFactory().getSpotManager().getSpot(id);
+      // } catch (NotFoundException pE) {
+      // this.addActionError("Utilisateur non trouvé. id = " + id);
+      // }
 
-	public String doAddComment() {
-		// On récupère l'utilisateur en session
-		Utilisateur utilisateurEnSession = (Utilisateur) this.session.get("user");
-		// Pour en récupérer l'id
-		commentaire.setUtilisateur(utilisateurEnSession);
-		//
-		// logger.info(commentaire.getId()+" "+commentaire.getContenu()+" id = " + id);
-		WebappHelper.getManagerFactory().getCommentaireManager().ajoutCommentaire(commentaire, id);
+    }
 
-		return ActionSupport.SUCCESS;
-	}
+    return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
 
-	public String doDelete() {
+  }
 
-		String vResult = ActionSupport.INPUT;
+  public String doCreate() {
 
-		if (id == null) {
-			vResult = ActionSupport.INPUT;
-		}
+    String vResult = ActionSupport.INPUT;
 
-		else {
+    try {
 
-			WebappHelper.getManagerFactory().getSpotManager().deleteSpot(id);
+      WebappHelper.getManagerFactory().getSpotManager().ajoutSpot(spot);
+      spotId = spot.getId();
+      vResult = ActionSupport.SUCCESS;
+      this.addActionMessage("Création d'un nouveau spot");
 
-			vResult = ActionSupport.SUCCESS;
-		}
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
 
-		return vResult;
-	}
+    }
 
-	public String doDeleteComment() {
+    return vResult;
 
-		String vResult = ActionSupport.INPUT;
+  }
 
-		if (commentaireId == null) {
+  public String doAddComment() {
+    // On récupère l'utilisateur en session
+    Utilisateur utilisateurEnSession = (Utilisateur) this.session.get("user");
+    // Pour en récupérer l'id
+    commentaire.setUtilisateur(utilisateurEnSession);
+    //
+    // logger.info(commentaire.getId()+" "+commentaire.getContenu()+" id = " + id);
+    WebappHelper.getManagerFactory().getCommentaireManager().ajoutCommentaire(commentaire, id);
 
-			vResult = ActionSupport.INPUT;
-		}
+    return ActionSupport.SUCCESS;
+  }
 
-		else {
+  public String doDelete() {
 
-			WebappHelper.getManagerFactory().getCommentaireManager().deleteCommentaire(commentaireId);
+    String vResult = ActionSupport.INPUT;
 
-			vResult = ActionSupport.SUCCESS;
-		}
+    if (id == null) {
+      vResult = ActionSupport.INPUT;
+    }
 
-		return vResult;
-	}
+    else {
+
+      WebappHelper.getManagerFactory().getSpotManager().deleteSpot(id);
+
+      vResult = ActionSupport.SUCCESS;
+    }
+
+    return vResult;
+  }
+
+  public String doDeleteComment() {
+
+    String vResult = ActionSupport.INPUT;
+
+    if (commentaireId == null) {
+
+      vResult = ActionSupport.INPUT;
+    }
+
+    else {
+
+      WebappHelper.getManagerFactory().getCommentaireManager().deleteCommentaire(commentaireId);
+
+      vResult = ActionSupport.SUCCESS;
+    }
+
+    return vResult;
+  }
+
+  public String doUpdateSpot() {
+
+    String vResult = ActionSupport.INPUT;
+
+    if (id == null) {
+
+      this.addActionError("veuillez donner un identifiant");
+
+    } else {
+
+      try {
+
+        spot = WebappHelper.getManagerFactory().getSpotManager().getSpot(id);
+        
+        adresse = WebappHelper.getManagerFactory().getAdresseManager().getAdresse(spot.getAdresse().getId());
+
+        if (!StringUtils.isEmpty(nom)) {
+          spot.setNom(nom);
+        }
+
+        if (!StringUtils.isEmpty(description)) {
+          spot.setDescription(description);
+        }
+
+        if (!StringUtils.isEmpty(rue)) {
+          adresse.setRue(rue);
+        }
+
+        if (!StringUtils.isEmpty(numero)) {
+          adresse.setNumero(numero);
+        }
+
+        if (!StringUtils.isEmpty(ville)) {
+          adresse.setVille(ville);
+        }
+
+        if (!StringUtils.isEmpty(codePostal)) {
+          adresse.setCodePostal(codePostal);
+        }
+
+        if (!StringUtils.isEmpty(departement)) {
+          adresse.setDepartement(departement);
+        }
+        
+       WebappHelper.getManagerFactory().getAdresseManager().updateAdresse(adresse);
+       
+       spot.setAdresse(adresse);
+
+       WebappHelper.getManagerFactory().getSpotManager().updateSpot(spot);
+
+      } catch (Exception E) {
+
+        vResult = ActionSupport.INPUT;
+      }
+
+    }
+
+    return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
+
+  }
 
 }

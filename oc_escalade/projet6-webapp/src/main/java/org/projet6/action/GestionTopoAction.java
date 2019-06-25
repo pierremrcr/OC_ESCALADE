@@ -11,6 +11,7 @@ import org.projet6.model.bean.Commentaire;
 import org.projet6.model.bean.ResaTopo;
 import org.projet6.model.bean.Topo;
 import org.projet6.model.bean.Utilisateur;
+import org.springframework.util.StringUtils;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -18,6 +19,8 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 
   private Integer             id;
   private Topo                topo;
+  private String              nom;
+  private String              description;
   private Date                dateDebut;
   private Date                dateFin;
   private Integer             topo_id;
@@ -30,6 +33,23 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
   private Integer             utilisateurId;
 
   static final Log logger = LogFactory.getLog(GestionResaTopoAction.class);
+  
+  
+  public String getNom() {
+    return nom;
+  }
+
+  public void setNom(String nom) {
+    this.nom = nom;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
   public Utilisateur getUtilisateurEnSession() {
     return utilisateurEnSession;
@@ -323,6 +343,42 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 
     return ActionSupport.SUCCESS;
 
+  }
+
+  public String doUpdateTopo() {
+    
+    String vResult = ActionSupport.INPUT;
+    
+    if (id == null) {
+
+      this.addActionError("veuillez donner un identifiant");
+
+    } else {
+
+      try {
+        
+        topo = WebappHelper.getManagerFactory().getTopoManager().getTopoById(id);
+        
+        if (!StringUtils.isEmpty(nom)) {
+          topo.setNom(nom);
+        }
+        
+        if (!StringUtils.isEmpty(description)) {
+          topo.setDescription(description);
+        }
+        
+        WebappHelper.getManagerFactory().getTopoManager().updateTopo(topo);
+        
+      } catch (Exception E) {
+        
+        vResult = ActionSupport.INPUT;
+      }
+      
+    }
+      
+      return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
+ 
+    
   }
 
 }

@@ -13,7 +13,7 @@
 			<result>/jsp/index.jsp</result>
 		</action>
 
-        <!-- ACTION UTILISATEURS -->
+		<!-- ACTION UTILISATEURS -->
 
 		<!-- Action listant les utilisateurs -->
 		<action name="utilisateur_list"
@@ -38,8 +38,25 @@
 			</result>
 		</action>
 
-		<!-- <action name="update_Account" -->
-		<!-- class="org.projet6.action.GestionUtilisateurAction" method="doUpdate"> -->
+		<action name="update_Account"
+			class="org.projet6.action.BackGestionUtilisateurAction"
+			method="doUpdate">
+			<result name="success" type="redirectAction">utilisateur_detail</result>
+			<result name="error">/jsp/erreur.jsp</result>
+		</action>
+
+		<action name="detail_account"
+			class="org.projet6.action.BackGestionUtilisateurAction"
+			method="doDetail">
+			<result name="success">/jsp/utilisateur/updateUtilisateur.jsp</result>
+			<result name="error">/jsp/site/error.jsp</result>
+		</action>
+
+		<action name="deleteAccount"
+			class="org.projet6.action.GestionUtilisateurAction" method="doDelete">
+			<result name="success">/jsp/utilisateur/confirmationSuppression.jsp
+			</result>
+		</action>
 
 
 		<!-- Action permettant d'afficher les réservations d'un utilisateur -->
@@ -66,11 +83,7 @@
 			<result type="redirectAction">index</result>
 		</action>
 
-		<action name="deleteAccount"
-			class="org.projet6.action.GestionUtilisateurAction" method="doDelete">
-			<result name="success">/jsp/utilisateur/confirmationSuppression.jsp
-			</result>
-		</action>
+
 
 
 		<!-- ACTION SITES -->
@@ -88,6 +101,23 @@
 			<result name="success">/jsp/spot/detail.jsp</result>
 			<result name="error">/jsp/erreur.jsp</result>
 		</action>
+
+		<action name="detail_spot"
+			class="org.projet6.action.GestionSpotAction" method="doDetail">
+			<result name="success">/jsp/spot/updateSpot.jsp</result>
+			<result name="error">/jsp/erreur.jsp</result>
+		</action>
+
+		<action name="updateSpot"
+			class="org.projet6.action.GestionSpotAction" method="doUpdateSpot">
+			<result name="success" type="redirectAction">
+				<param name="actionName">spot_detail</param>
+				<param name="id">${id}</param>
+			</result>
+			<result name="error">/jsp/erreur.jsp</result>
+		</action>
+
+
 
 		<!-- Action permettant d'ajouter un nouveau spot -->
 		<action name="nouveau_spot"
@@ -161,6 +191,22 @@
 			<result name="success">/jsp/topo/confirmationSuppressionTopo.jsp
 			</result>
 		</action>
+
+		<action name="updateTopo"
+			class="org.projet6.action.GestionTopoAction" method="doUpdateTopo">
+			<result name="success" type="redirectAction">
+				<param name="actionName">topo_detail</param>
+				<param name="id">${id}</param>
+			</result>
+		</action>
+
+		<action name="detail_Topo"
+			class="org.projet6.action.GestionTopoAction" method="doDetail">
+			<result name="success">/jsp/topo/updateTopo.jsp</result>
+			<result name="error">/jsp/site/error.jsp</result>
+		</action>
+
+
 
 		<!-- RESERVATION TOPO -->
 

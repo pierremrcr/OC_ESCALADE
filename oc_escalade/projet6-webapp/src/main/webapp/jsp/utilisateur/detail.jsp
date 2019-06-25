@@ -21,8 +21,7 @@
 
    </ul>
 
-   <s:a action="update_Account">
-      <s:param name="id" value="id" />
+   <s:a action="detail_account">
       <button class="btn btn-danger">Modifier mes informations</button>
    </s:a>
 

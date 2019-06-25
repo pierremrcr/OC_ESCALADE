@@ -96,7 +96,7 @@ public class UtilisateurDaoImpl extends AbstractDaoImpl implements UtilisateurDa
 		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource());
 
 		vJdbcTemplate.update(vSQL, utilisateur.getNom(), utilisateur.getPrenom(), utilisateur.getAdresseMail(),
-				utilisateur.getMotDePasse(), utilisateur.getPresentation(), utilisateur.getNiveau());
+				utilisateur.getMotDePasse(), utilisateur.getPresentation(), utilisateur.getNiveau(), utilisateur.getId());
 	}
 
 }
