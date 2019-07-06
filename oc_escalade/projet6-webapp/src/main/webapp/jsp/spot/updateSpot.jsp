@@ -23,8 +23,8 @@
             <s:textfield name="Rue" class="form-control"  value="%{spot.adresse.rue}" label="Rue" requiredLabel="false"></s:textfield>
             <s:textfield name="Numero" class="form-control"  value="%{spot.adresse.numero}" label="Numero" requiredLabel="false"></s:textfield>
             <s:textfield name="Ville" class="form-control"  value="%{spot.adresse.ville}" label="Ville" requiredLabel="false"></s:textfield>
-            <s:textfield name="Code Postal" class="form-control"  value="%{spot.adresse.codePostal}" label="Code Postal" requiredLabel="true"></s:textfield>
-            <s:textfield name="Département" class="form-control"  value="%{spot.adresse.departement}" label="Département" requiredLabel="true"></s:textfield>
+            <s:textfield name="CodePostal" class="form-control"  value="%{spot.adresse.codePostal}" label="Code Postal" requiredLabel="true"></s:textfield>
+            <s:textfield name="Departement" class="form-control"  value="%{spot.adresse.departement}" label="Département" requiredLabel="true"></s:textfield>
            
             <s:submit value="Sauvegarder modification" class="btn btn-primary center-block" />
 

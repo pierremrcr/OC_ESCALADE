@@ -4,6 +4,7 @@ package org.projet6.business.managerImpl;
 
 import java.util.List;
 
+
 import org.projet6.business.manager.AbstractManager;
 import org.projet6.business.manager.SpotManager;
 import org.projet6.model.bean.Adresse;
@@ -105,13 +106,23 @@ public class SpotManagerImpl extends AbstractManager implements SpotManager {
 	}
 	
 	
+  @Transactional(value = "txManager")
+	public void updateSpot(final Spot spot) {
+    
+    TransactionTemplate vTransactionTemplate = new TransactionTemplate(getPlatformTransactionManager());
 
-	public void updateSpot(Spot spot) {
+    vTransactionTemplate.execute(new TransactionCallbackWithoutResult() {
+      
+      @Override
+      protected void doInTransactionWithoutResult(TransactionStatus status) {
+    	
+		  getDaoFactory().getSpotDao().updateSpot(spot);
 		
-		getDaoFactory().getSpotDao().updateSpot(spot);
 		
-		
-	}
+      }
+    });
+
+  }
 
 //	public List<Spot> rechercheMultiCriteres(int nombreDePoints, String typeCotation) {
 //		
@@ -142,7 +153,6 @@ public class SpotManagerImpl extends AbstractManager implements SpotManager {
 			
 		
 	}
-
 
 
 

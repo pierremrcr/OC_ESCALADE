@@ -48,12 +48,23 @@ public class AdresseManagerImpl extends AbstractManager implements AdresseManage
 		
 		
 }
-	
-	public void updateAdresse(Adresse adresse) {
+	@Transactional(value = "txManager")
+	public void updateAdresse(final Adresse adresse) {
+	  
+	  TransactionTemplate vTransactionTemplate = new TransactionTemplate(getPlatformTransactionManager());
+	  
+    vTransactionTemplate.execute(new TransactionCallbackWithoutResult() {
+      
+    @Override
+    protected void doInTransactionWithoutResult(TransactionStatus status) {
 		
 		getDaoFactory().getAdresseDao().updateAdresse(adresse);
 		
-	}
+    }
+    
+    });
+            
+  }
 
 	public void deleteAdresse(int id) {
 		

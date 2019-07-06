@@ -15,7 +15,7 @@ public class GestionUtilisateurAction extends ActionSupport implements SessionAw
   private List<Utilisateur>   listUtilisateur;
   private Utilisateur         utilisateur;
   private Map<String, Object> session;
-
+  private int                 utilisateurId;
 
   public void setSession(Map<String, Object> pSession) {
     this.session = pSession;
@@ -47,6 +47,16 @@ public class GestionUtilisateurAction extends ActionSupport implements SessionAw
 
   public void setUtilisateur(Utilisateur utilisateur) {
     this.utilisateur = utilisateur;
+  }
+  
+  
+
+  public int getUtilisateurId() {
+    return utilisateurId;
+  }
+
+  public void setUtilisateurId(int utilisateurId) {
+    this.utilisateurId = utilisateurId;
   }
 
   public String doList() {
@@ -108,23 +118,35 @@ public class GestionUtilisateurAction extends ActionSupport implements SessionAw
 
     Utilisateur utilisateurEnSession = (Utilisateur) this.session.get("user");
 
-    int utilisateurId = utilisateurEnSession.getId();
+    utilisateurId = utilisateurEnSession.getId();
 
-    try {
+    if (utilisateurId == 0) {
+
+      vResult = ActionSupport.INPUT;
+
+    } else {
 
       WebappHelper.getManagerFactory().getUtilisateurManager().deleteUtilisateur(utilisateurId);
       vResult = ActionSupport.SUCCESS;
-      this.addActionMessage("votre compte a bien été supprimé");
 
-    } catch (Exception e) {
-
-      vResult = ActionSupport.INPUT;
     }
 
     return vResult;
 
-  }
+//    try {
+////
+////      WebappHelper.getManagerFactory().getUtilisateurManager().deleteUtilisateur(utilisateurId);
+////      vResult = ActionSupport.SUCCESS;
+////      this.addActionMessage("votre compte a bien été supprimé");
+////
+////    } catch (Exception e) {
+////      
+////
+////      vResult = ActionSupport.INPUT;
+////    }
+////
+////    return vResult;
 
- 
+  }
 
 }

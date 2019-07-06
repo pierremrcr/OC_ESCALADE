@@ -54,7 +54,7 @@
 
 		<action name="deleteAccount"
 			class="org.projet6.action.GestionUtilisateurAction" method="doDelete">
-			<result name="success">/jsp/utilisateur/confirmationSuppression.jsp
+			<result name="success" type="redirectAction">logout
 			</result>
 		</action>
 
@@ -102,7 +102,7 @@
 			<result name="error">/jsp/erreur.jsp</result>
 		</action>
 
-		<action name="detail_spot"
+		<action name="detail_Spot"
 			class="org.projet6.action.GestionSpotAction" method="doDetail">
 			<result name="success">/jsp/spot/updateSpot.jsp</result>
 			<result name="error">/jsp/erreur.jsp</result>

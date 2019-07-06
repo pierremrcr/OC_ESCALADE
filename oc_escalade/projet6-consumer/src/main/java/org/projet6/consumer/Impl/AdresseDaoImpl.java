@@ -86,7 +86,7 @@ public class AdresseDaoImpl extends AbstractDaoImpl implements AdresseDao {
 		
 		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource());
 		
-		vJdbcTemplate.update(vSQL, adresse.getRue(), adresse.getNumero(), adresse.getCodePostal(), adresse.getVille(), adresse.getDepartement());
+		vJdbcTemplate.update(vSQL, adresse.getRue(), adresse.getNumero(), adresse.getCodePostal(), adresse.getVille(), adresse.getDepartement(), adresse.getId());
 		
 	}
 	

@@ -93,7 +93,7 @@ public class SpotDaoImpl extends AbstractDaoImpl implements SpotDao {
 
 		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource());
 
-		vJdbcTemplate.update(vSQL, spot.getNom(), spot.getDescription(), spot.getAdresse().getId());
+		vJdbcTemplate.update(vSQL, spot.getNom(), spot.getDescription(), spot.getAdresse().getId(), spot.getId());
 
 	}
 
